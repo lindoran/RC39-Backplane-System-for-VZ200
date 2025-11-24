@@ -14,7 +14,7 @@ The current focus is on creating a **VZ200 clone workalike**.
   - Five 39-pin RC39-compliant connectors for expansion cards  
   - I/O expansion header matching the VZ200 pinout  
   - RC39 is essentially the RC2014 bus with one pin removed, allowing connectors to fit on a 100mm × 100mm PCB  
-- **Card Size:** All cards are ≤100mm × 100mm, with two-layer artwork or less, keeping manufacturing costs low for a complete set of boards  
+- **Card Size:** All cards are 100mm × 100mm (or smaller), with two-layer artwork or less, keeping manufacturing costs low for a complete set of boards  
 
 ---
 
