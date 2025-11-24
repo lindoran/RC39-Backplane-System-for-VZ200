@@ -1,0 +1,48 @@
+Name     Serial Card Gal.dig ;
+PartNo   00 ;
+Date     19.11.2025 ;
+Revision 01 ;
+Designer david ;
+Company  unknown ;
+Assembly None ;
+Location unknown ;
+Device   g22v10 ;
+
+ar = 'b'0 ;
+sp = 'b'0 ;
+
+/* inputs */
+PIN 1 = CLK;
+PIN 5 = A4;
+PIN 4 = A5;
+PIN 3 = A6;
+PIN 2 = A7;
+PIN 11 = IOREQ;
+PIN 13 = IRQ;
+PIN 8 = M1;
+PIN 7 = RX;
+PIN 6 = TX;
+
+/* outputs */
+PIN 16 = Zn;
+PIN 20 = SCLKn;
+PIN 23 = RTS;
+PIN 22 = RXLED;
+PIN 21 = TXLED;
+PIN 15 = E;
+PIN 14 = IODEC;
+
+/* sequential logic */
+SCLKn.D = Zn;
+SCLKn.ar = ar ;
+SCLKn.sp = sp ;
+Zn.D = !SCLKn;
+Zn.ar = ar ;
+Zn.sp = sp ;
+
+/* combinatorial logic */
+E = !IOREQ;
+IODEC = A4 # A5 # A6 # !A7 # !M1;
+RTS = !IRQ;
+RXLED = !TX;
+TXLED = !RX;

@@ -1,0 +1,46 @@
+Name     VDG Card GAL.dig ;
+PartNo   00 ;
+Date     20.11.2025 ;
+Revision 01 ;
+Designer david ;
+Company  unknown ;
+Assembly None ;
+Location unknown ;
+Device   g22v10 ;
+
+ar = 'b'0 ;
+sp = 'b'0 ;
+
+/* inputs */
+PIN 1 = CLK;
+PIN 2 = A11;
+PIN 3 = A12;
+PIN 4 = A13;
+PIN 5 = A14;
+PIN 6 = A15;
+PIN 10 = D3;
+PIN 9 = D4;
+PIN 13 = MREQ;
+PIN 11 = WR;
+
+/* outputs */
+PIN 21 = CSSn;
+PIN 22 = AGn;
+PIN 20 = DRAM;
+PIN 19 = VZIO;
+PIN 23 = INTLATCH;
+
+/* sequential logic */
+AGn.D = (A11 & !A12 & A13 & A14 & !A15 & D3 & !MREQ & !WR) # (!A11 & AGn) # (A12 & AGn) # (!A13 & AGn) 
+     # (!A14 & AGn) # (A15 & AGn) # (AGn & MREQ) # (AGn & WR);
+AGn.ar = ar ;
+AGn.sp = sp ;
+CSSn.D = (A11 & !A12 & A13 & A14 & !A15 & D4 & !MREQ & !WR) # (!A11 & CSSn) # (A12 & CSSn) 
+     # (!A13 & CSSn) # (!A14 & CSSn) # (A15 & CSSn) # (CSSn & MREQ) # (CSSn & WR);
+CSSn.ar = ar ;
+CSSn.sp = sp ;
+
+/* combinatorial logic */
+DRAM = A11 # !A12 # !A13 # !A14 # A15 # MREQ;
+INTLATCH = A11 & !A12 & A13 & A14 & !A15 & !MREQ & !WR;
+VZIO = !A11 # A12 # !A13 # !A14 # A15 # MREQ;

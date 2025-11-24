@@ -1,0 +1,52 @@
+Name     Banking GAL.dig ;
+PartNo   00 ;
+Date     19.11.2025 ;
+Revision 01 ;
+Designer david ;
+Company  unknown ;
+Assembly None ;
+Location unknown ;
+Device   g22v10 ;
+
+ar = 'b'0 ;
+sp = 'b'0 ;
+
+/* inputs */
+PIN 1 = CLK;
+PIN 8 = A14;
+PIN 7 = A15;
+PIN 5 = A4;
+PIN 4 = A5;
+PIN 3 = A6;
+PIN 2 = A7;
+PIN 6 = BANK;
+PIN 10 = D0;
+PIN 11 = D1;
+PIN 13 = D2;
+PIN 9 = D3;
+
+/* outputs */
+PIN 14 = Zn;
+PIN 15 = Z_1n;
+PIN 16 = Z_2n;
+PIN 23 = BA16;
+PIN 22 = BA15;
+PIN 21 = BA14;
+PIN 20 = FU;
+
+/* sequential logic */
+Z_1n.D = (A4 & A5 & A6 & !A7 & D1) # (!A4 & Z_1n) # (!A5 & Z_1n) # (!A6 & Z_1n) # (A7 & Z_1n);
+Z_1n.ar = ar ;
+Z_1n.sp = sp ;
+Z_2n.D = (A4 & A5 & A6 & !A7 & D2) # (!A4 & Z_2n) # (!A5 & Z_2n) # (!A6 & Z_2n) # (A7 & Z_2n);
+Z_2n.ar = ar ;
+Z_2n.sp = sp ;
+Zn.D = (A4 & A5 & A6 & !A7 & D0) # (!A4 & Zn) # (!A5 & Zn) # (!A6 & Zn) # (A7 & Zn);
+Zn.ar = ar ;
+Zn.sp = sp ;
+
+/* combinatorial logic */
+BA14 = (A14 & BANK) # (Zn & !BANK);
+BA15 = (A15 & BANK) # (Z_1n & !BANK);
+BA16 = Z_2n & !BANK;
+FU = D3;

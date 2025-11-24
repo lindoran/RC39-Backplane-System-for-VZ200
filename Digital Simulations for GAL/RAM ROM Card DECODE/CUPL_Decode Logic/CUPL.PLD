@@ -1,0 +1,35 @@
+Name     Decode Logic.dig ;
+PartNo   00 ;
+Date     16.11.2025 ;
+Revision 01 ;
+Designer david ;
+Company  unknown ;
+Assembly None ;
+Location unknown ;
+Device   g22v10 ;
+
+ar = 'b'0 ;
+sp = 'b'0 ;
+
+/* inputs */
+PIN 5 = A11;
+PIN 4 = A12;
+PIN 3 = A13;
+PIN 2 = A14;
+PIN 1 = A15;
+PIN 13 = IOREQ;
+PIN 11 = M1;
+PIN 10 = MREQ;
+PIN 9 = WR;
+
+/* outputs */
+PIN 23 = IOWRI;
+PIN 22 = BANK;
+PIN 18 = RAM;
+PIN 17 = ROM;
+
+/* combinatorial logic */
+BANK = !A14 # !A15;
+IOWRI = IOREQ # !M1 # WR;
+RAM = (!A11 & !A15) # (!A12 & !A15) # (!A13 & !A15) # (!A14 & !A15) # MREQ;
+ROM = A14 # A15 # MREQ;
