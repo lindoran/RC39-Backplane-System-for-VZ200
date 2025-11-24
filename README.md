@@ -27,7 +27,7 @@ The current focus is on creating a **VZ200 clone workalike**.
   - Beeper, tape, and sound support  
   - Built-in modern RP2040 I/O interface  
   - Front-facing design with classic VZ-style keyboard connector  
-  - RP2040 can potentially control the computer keyboard via HID over USB or I²C header  
+  - RP2040 can potentially control the computer keyboard via HID over USB or I²C header (requires implementation)  
 
 ---
 
