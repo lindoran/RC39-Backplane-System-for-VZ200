@@ -1,22 +1,39 @@
-This is my RC39 based backplane for building home computer workalikes.  The focus right now is to buld a VZ200 Clone work alike.
+# RC39 Backplane for VZ200 Clone Workalike
 
-Backplane / features: 
-    - 5V input provided by a center positive barel jack 
-    - Reset is open collector provided by a NPN transistor with a strong pull up for a very fast edge
-    - Reset is a standard 555 timer reset circut.
-    - mounting lugs for an IO shelft above the IO expansion header, all which are positioned in the back
-      of the board. with accsess to the reset switch from the front.
-    - 5 39 pin RC39 compliant connectors for expansion cards and a IO expansion header that matches the
-      same pinout as the VZ200.  RC39 is RC2014 bus with 1 pin cut off so that the connecctor will fit on
-      a 100mm x 100mm PCB.
-    - None of the cards are more than 100mmx100mm, with all artwork being 2 sided or less, which should 
-      keep cost low for ordering a full set of boards.
+This project is an **RC39-based backplane** designed for building home computer workalikes.  
+The current focus is on creating a **VZ200 clone workalike**.
 
-Current cards: 
-   - CPU / CLOCK Board
-   - SERIAL 6850 Card with GAL Selection logic
-   - RAM / ROM Card with GAL Selection and banking logic
-   - 6847 display, Dual port ram card, with GAL selection logic
-   - 3v IO interface with beeper, tape and sound support. built in modern RP2040 IO interface.
-     Card is front facing, with a clasic VZ style keyboard interface. RP2040 can be potentially
-     used to control the computer keyboard via HID connection through its USB or I2C header.
+---
+
+## Backplane Features
+- **Power Input:** 5V supplied via a center-positive barrel jack  
+- **Reset Circuit (Fast Edge):** Open-collector NPN transistor with strong pull-up  
+- **Reset Circuit (Standard):** 555 timer-based reset design  
+- **Mounting:** Lugs for an I/O shelf above the expansion header, positioned at the back of the board, with reset switch accessible from the front  
+- **Expansion Connectors:**  
+  - Five 39-pin RC39-compliant connectors for expansion cards  
+  - I/O expansion header matching the VZ200 pinout  
+  - RC39 is essentially the RC2014 bus with one pin removed, allowing connectors to fit on a 100mm × 100mm PCB  
+- **Card Size:** All cards are ≤100mm × 100mm, with two-layer artwork or less, keeping manufacturing costs low for a complete set of boards  
+
+---
+
+## Current Cards
+- **CPU / Clock Board**  
+- **Serial Card:** 6850 UART with GAL-based selection logic  
+- **RAM / ROM Card:** Includes GAL-based selection and banking logic  
+- **Display Card:** MC6847 video chip with dual-port RAM and GAL selection logic  
+- **I/O Interface Card (3V):**  
+  - Beeper, tape, and sound support  
+  - Built-in modern RP2040 I/O interface  
+  - Front-facing design with classic VZ-style keyboard connector  
+  - RP2040 can potentially control the computer keyboard via HID over USB or I²C header  
+
+---
+
+## License
+This project is licensed under the **GNU General Public License v3.0 (GPL-3.0)**.  
+
+You are free to use, modify, and distribute this project under the terms of the GPL.  
+See the [LICENSE](https://www.gnu.org/licenses/gpl-3.0.en.html) file or the GNU website for full details.
+
