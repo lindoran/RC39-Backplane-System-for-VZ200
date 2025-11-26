@@ -7,7 +7,6 @@ The current focus is on creating a **VZ200 clone workalike**.
 
 ## Backplane Features
 - **Power Input:** 5V supplied via a center-positive barrel jack  
-- **Reset Circuit (Fast Edge):** Open-collector NPN transistor with strong pull-up  
 - **Reset Circuit (Standard):** 555 timer-based reset design  
 - **Mounting:** Lugs for an I/O shelf above the expansion header, positioned at the back of the board, with reset switch accessible from the front  
 - **Expansion Connectors:**  
