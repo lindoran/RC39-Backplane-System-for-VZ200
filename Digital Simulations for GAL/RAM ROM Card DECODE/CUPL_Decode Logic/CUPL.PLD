@@ -1,6 +1,6 @@
 Name     Decode Logic.dig ;
 PartNo   00 ;
-Date     16.11.2025 ;
+Date     10.12.2025 ;
 Revision 01 ;
 Designer david ;
 Company  unknown ;
@@ -30,6 +30,6 @@ PIN 17 = ROM;
 
 /* combinatorial logic */
 BANK = !A14 # !A15;
-IOWRI = IOREQ # !M1 # WR;
+IOWRI = !IOREQ & M1 & !WR;
 RAM = (!A11 & !A15) # (!A12 & !A15) # (!A13 & !A15) # (!A14 & !A15) # MREQ;
 ROM = A14 # A15 # MREQ;

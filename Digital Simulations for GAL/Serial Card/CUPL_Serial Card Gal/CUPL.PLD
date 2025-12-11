@@ -1,6 +1,6 @@
 Name     Serial Card Gal.dig ;
 PartNo   00 ;
-Date     19.11.2025 ;
+Date     04.12.2025 ;
 Revision 01 ;
 Designer david ;
 Company  unknown ;
@@ -44,5 +44,5 @@ Zn.sp = sp ;
 E = !IOREQ;
 IODEC = A4 # A5 # A6 # !A7 # !M1;
 RTS = !IRQ;
-RXLED = !TX;
-TXLED = !RX;
+RXLED = RX;
+TXLED = TX;

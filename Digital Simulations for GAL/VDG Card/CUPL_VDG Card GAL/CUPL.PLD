@@ -1,6 +1,6 @@
 Name     VDG Card GAL.dig ;
 PartNo   00 ;
-Date     20.11.2025 ;
+Date     11.12.2025 ;
 Revision 01 ;
 Designer david ;
 Company  unknown ;
@@ -22,13 +22,17 @@ PIN 10 = D3;
 PIN 9 = D4;
 PIN 13 = MREQ;
 PIN 11 = WR;
+PIN 8 = WT0;
+PIN 7 = WT1;
 
 /* outputs */
 PIN 21 = CSSn;
 PIN 22 = AGn;
+PIN 14 = Zn;
 PIN 20 = DRAM;
 PIN 19 = VZIO;
 PIN 23 = INTLATCH;
+PIN 18 = VDGCE;
 
 /* sequential logic */
 AGn.D = (A11 & !A12 & A13 & A14 & !A15 & D3 & !MREQ & !WR) # (!A11 & AGn) # (A12 & AGn) # (!A13 & AGn) 
@@ -39,8 +43,12 @@ CSSn.D = (A11 & !A12 & A13 & A14 & !A15 & D4 & !MREQ & !WR) # (!A11 & CSSn) # (A
      # (!A13 & CSSn) # (!A14 & CSSn) # (A15 & CSSn) # (CSSn & MREQ) # (CSSn & WR);
 CSSn.ar = ar ;
 CSSn.sp = sp ;
+Zn.D = WT0 & WT1;
+Zn.ar = ar ;
+Zn.sp = sp ;
 
 /* combinatorial logic */
 DRAM = A11 # !A12 # !A13 # !A14 # A15 # MREQ;
-INTLATCH = A11 & !A12 & A13 & A14 & !A15 & !MREQ & !WR;
+INTLATCH = !MREQ & !WR;
+VDGCE = !A11 & A12 & A13 & A14 & !A15 & !Zn & !MREQ & !WR;
 VZIO = !A11 # A12 # !A13 # !A14 # A15 # MREQ;
