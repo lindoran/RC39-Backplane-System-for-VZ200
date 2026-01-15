@@ -1,0 +1,16 @@
+.program vz_kbd
+    // pre stage the data path see TODO in setup1().
+    pull block         ; pull 0x3F from TX FIFO to OSR
+    out pins, 6        ; dump 0x3F on the dataport
+    // first read is always going to be "all keys up"
+    // on whatever row is read including an invalid row
+    // somehow, the first read always fails we use the
+    // above lines to hack around that issue.
+wait_rd_low:
+    wait 0 pin 14      ; we wait for VZRD to go low.
+    in pins, 8         ; autopush will happen after 8 bits
+    pull block         ; wait for CPU data
+    out pins, 6        ; we update the Z80 DATAPORT
+    wait 1 pin 14      ; wait for end of read cycle
+    jmp wait_rd_low    ; do it again.
+

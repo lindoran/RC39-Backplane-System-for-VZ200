@@ -1,0 +1,7 @@
+{
+    "configuration": "flash=2097152_0,freq=200,opt=Small,os=none,profile=Disabled,rtti=Disabled,stackprotect=Disabled,exceptions=Disabled,dbgport=Disabled,dbglvl=None,usbstack=tinyusb_host,ipbtstack=ipv4only,uploadmethod=default",
+    "board": "rp2040:rp2040:waveshare_rp2040_zero",
+    "sketch": "Arduino/vziosim_usb/vziosim_usb.ino",
+    "port": "/dev/ttyS0",
+    "output": "../build"
+}
