@@ -127,8 +127,6 @@ bool    prev_report_valid = false;
 uint8_t prev_modifiers = 0;
 bool    prev_mod_valid = false;
 
-bool caps_lock_on = false;
-
 // Arrow key state tracking: stores which arrow key is currently pressed (0x50, 0x4F, 0x52, 0x51)
 // 0 = no arrow key pressed
 uint8_t current_arrow_key = 0;
@@ -208,11 +206,6 @@ void sync_vz_matrix_to_keymatrix() {
     }
     keymatrix[0x00] = presence;  // Base address shows ANY key pressed
 
-    
-    // DEBUG
-    PIOSerial.printf("SYNC: vz[0]=0x%02X -> keymatrix[0xFE]=0x%02X\r\n",
-                     vz_matrix[0], keymatrix[ROW0]);
-
     // Atomic update for Core 1
     update_keymatrix(keymatrix);
 }
@@ -260,12 +253,6 @@ void loop() {
                     hid_ifaces[i].instance);
 
         if (ok != hid_ifaces[i].last_rearm_ok) {
-          PIOSerial.printf(
-            "DEBUG: re-arm dev=%u inst=%u -> %u (t=%lu)\r\n",
-            hid_ifaces[i].dev_addr,
-            hid_ifaces[i].instance,
-            ok ? 1 : 0,
-            now);
           hid_ifaces[i].last_rearm_ok = ok;
         }
         if (ok) hid_ifaces[i].pending = true;
@@ -385,12 +372,8 @@ void print_device_descriptor(tuh_xfer_t *xfer) {
 // -----------------------------------------------------------------------------
 void tuh_hid_mount_cb(uint8_t dev_addr, uint8_t instance,
                       uint8_t const* desc, uint16_t desc_len) {
-  PIOSerial.printf("DEBUG: tuh_hid_mount_cb dev=%u instance=%u desc_len=%u\r\n",
-                   dev_addr, instance, desc_len);
-
   int slot = hid_slot_for(dev_addr, instance);
   if (slot < 0) {
-    PIOSerial.println("DEBUG: no free HID slot");
     return;
   }
 
@@ -399,22 +382,14 @@ void tuh_hid_mount_cb(uint8_t dev_addr, uint8_t instance,
   hid_ifaces[slot].instance = instance;
   hid_ifaces[slot].pending = false;
 
-  PIOSerial.print("DEBUG: mount desc bytes:");
-  for (uint16_t i = 0; i < desc_len; i++)
-    PIOSerial.printf(" 0x%02x", desc[i]);
-  PIOSerial.println();
-
   bool ok = tuh_hid_receive_report(dev_addr, instance);
   hid_ifaces[slot].last_rearm_ok = ok;
   if (ok) hid_ifaces[slot].pending = true;
 
-  PIOSerial.println("DEBUG: Keyboard ready");
+  PIOSerial.println("Keyboard ready");
 }
 
 void tuh_hid_umount_cb(uint8_t dev_addr, uint8_t instance) {
-  PIOSerial.printf("DEBUG: tuh_hid_umount_cb dev=%u instance=%u\r\n",
-                   dev_addr, instance);
-
   for (int i = 0; i < MAX_HID_IFACES; i++) {
     if (hid_ifaces[i].mounted &&
         hid_ifaces[i].dev_addr == dev_addr &&
@@ -427,8 +402,6 @@ void tuh_hid_umount_cb(uint8_t dev_addr, uint8_t instance) {
 }
 
 void tuh_hid_report_received_cb(tuh_xfer_t *xfer) {
-  PIOSerial.println("DEBUG: tuh_hid_report_received_cb(xfer) CALLED");
-
   if (!xfer || !xfer->buffer) return;
 
   for (int i = 0; i < MAX_HID_IFACES; i++) {
@@ -446,9 +419,6 @@ void tuh_hid_report_received_cb(uint8_t dev_addr,
                                 uint8_t instance,
                                 uint8_t const* report,
                                 uint16_t len) {
-  
-  PIOSerial.printf("DEBUG: tuh_hid_report_received_cb(legacy) dev=%u inst=%u len=%u\r\n", 
-                   dev_addr, instance, len);
   (void)instance;
   if (!report) return;
 
@@ -610,9 +580,6 @@ void process_hid_report(uint8_t const* buf_in,
     }
     // this is how we handle keys that don't belong to vz keyboard
     if (!seen_before) {
-      // caps lock handling: 
-      if (usage == 0x39) caps_lock_on = !caps_lock_on;
-
       // arrow keys remap
       switch(usage) {
         case 0x50: // left arrow CTRL + 'M'

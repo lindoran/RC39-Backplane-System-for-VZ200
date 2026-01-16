@@ -29,9 +29,6 @@ void vz_key_release(uint8_t scancode);
 // Query whether a given PC scancode is mapped to the VZ matrix
 bool vz_scancode_mapped(uint8_t scancode);
 
-// Translate VZ row address (active-low) to matrix byte
-uint8_t vz_read_row(uint8_t row_address);
-
 #ifdef __cplusplus
 }
 #endif

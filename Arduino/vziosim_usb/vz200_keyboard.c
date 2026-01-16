@@ -152,13 +152,3 @@ bool vz_scancode_mapped(uint8_t scancode)
     vz_key_t k = pc_to_vz[scancode];
     return (k.row < 8 && k.bit < 6);
 }
-
-// ---------------------------------------------------------------------------
-// Read row selected by VZ-200 (active-low address)
-// ---------------------------------------------------------------------------
-
-uint8_t vz_read_row(uint8_t row_address)
-{
-    uint8_t index = (~row_address) & 0x07;
-    return vz_matrix[index];
-}

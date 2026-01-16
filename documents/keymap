@@ -40,3 +40,30 @@ RSHIFT = 20 and is mapped to SHIFT
 LCTRL = 01 and is mapped to CTRL
 RCTRL = 10 and is mapped to CTRL
 
+ARROW KEYS AND BACKSPACE / DELETE HANDLING (from vziosim_usb.ino)
+================================================================
+
+The VZ200 does not have dedicated arrow keys or a dedicated delete key. Instead, these are emulated
+using CTRL + other keys. The Arduino firmware handles the following mappings:
+
+PC KEYBOARD              VZ200 EQUIVALENT
+left arrow (0x50)        CTRL + 'M'
+right arrow (0x4F)       CTRL + ',' (comma)
+up arrow (0x52)          CTRL + '.' (period)
+down arrow (0x51)        CTRL + ' ' (space)
+Delete key (0x4C)        CTRL + ';' (RUBOUT)
+Backspace key (0x2A)     CTRL + 'M' (same as left arrow)
+
+CTRL MANAGEMENT
+When multiple arrow keys or delete are pressed simultaneously:
+- The first arrow key or delete press activates CTRL
+- Switching between different arrow keys keeps CTRL active
+- CTRL is only released when ALL arrow keys AND delete are released
+- This allows seamless arrow key combinations on VZ200
+
+EXAMPLES
+- Press left arrow: CTRL pressed, 'M' pressed
+- Release left arrow, press right arrow: 'M' released, ',' pressed (CTRL stays active)
+- Press delete while arrow active: ';' also pressed (CTRL already active)
+- Release delete: ';' released, but CTRL stays active if arrow still held
+- Release all arrows/delete: CTRL is finally released
