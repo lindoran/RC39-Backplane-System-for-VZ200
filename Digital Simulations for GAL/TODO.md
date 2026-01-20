@@ -1,6 +1,4 @@
-============================================================
-                 VZ200 I/O CONTROLLER — TODO
-============================================================
+# VZ200 I/O CONTROLLER — TODO
 
 [1] Keyboard Interface Redesign
     - Remove legacy VZ-style keyboard connector entirely.
@@ -35,9 +33,7 @@
     - Ensure compatibility with existing cables or document new wiring.
 
 
-============================================================
-                     ANALOG BOARD — TODO
-============================================================
+# ANALOG BOARD — TODO
 
 [1] Tape Jack Orientation
     - Correct the tape jack orientation (currently backwards).
@@ -50,9 +46,7 @@
     - Update silkscreen and mechanical notes to reflect orientation.
 
 
-============================================================
-                     SERIAL BOARD — TODO
-============================================================
+# SERIAL BOARD — TODO
 
 [1] Crystal Power Pin Update
     - Update power pins for the crystal footprint.
@@ -61,9 +55,7 @@
     - Regenerate footprint library entry if needed for consistency.
 
 
-============================================================
-                     VIDEO BOARD — TODO
-============================================================
+# VIDEO BOARD — TODO
 
 [1] Address Bus Tri‑State Fixes
     - Move the existing bodges that handle address‑bus tri‑stating
@@ -75,9 +67,7 @@
     - Update routing and silkscreen to reflect the corrected logic.
 
 
-============================================================
-                     RAM BOARD — TODO
-============================================================
+# RAM BOARD — TODO
 
 [1] Bank Register Address Interface
     - Confirm all address lines feeding the bank‑select register are
@@ -88,9 +78,7 @@
     - Ensure the bank‑select output drives the RAM decode cleanly.
 
 
-============================================================
-              FIRMWARE / ROM INVESTIGATION — TODO
-============================================================
+# FIRMWARE / ROM INVESTIGATION — TODO
 
 [1] Cartridge ROM Space Exploration
     - Investigate whether firmware can open up the ROM region for
@@ -111,6 +99,3 @@
         * any hidden or undocumented ROM hooks
     - Document all findings for future firmware patches.
 
-============================================================
-                     END OF TODO LIST
-============================================================
