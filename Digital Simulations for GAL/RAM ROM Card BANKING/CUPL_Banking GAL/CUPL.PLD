@@ -1,6 +1,6 @@
 Name     Banking GAL.dig ;
 PartNo   00 ;
-Date     19.11.2025 ;
+Date     22.01.2026 ;
 Revision 01 ;
 Designer david ;
 Company  unknown ;
@@ -29,12 +29,15 @@ PIN 9 = D3;
 PIN 14 = Zn;
 PIN 15 = Z_1n;
 PIN 16 = Z_2n;
+PIN 20 = CFG10Kn;
 PIN 23 = BA16;
 PIN 22 = BA15;
 PIN 21 = BA14;
-PIN 20 = FU;
 
 /* sequential logic */
+CFG10Kn.D = (A4 & A5 & A6 & !A7 & D3) # (!A4 & CFG10Kn) # (!A5 & CFG10Kn) # (!A6 & CFG10Kn) # (A7 & CFG10Kn);
+CFG10Kn.ar = ar ;
+CFG10Kn.sp = sp ;
 Z_1n.D = (A4 & A5 & A6 & !A7 & D1) # (!A4 & Z_1n) # (!A5 & Z_1n) # (!A6 & Z_1n) # (A7 & Z_1n);
 Z_1n.ar = ar ;
 Z_1n.sp = sp ;
@@ -49,4 +52,3 @@ Zn.sp = sp ;
 BA14 = (A14 & BANK) # (Zn & !BANK);
 BA15 = (A15 & BANK) # (Z_1n & !BANK);
 BA16 = Z_2n & !BANK;
-FU = D3;

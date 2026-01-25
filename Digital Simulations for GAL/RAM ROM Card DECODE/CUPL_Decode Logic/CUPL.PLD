@@ -1,6 +1,6 @@
 Name     Decode Logic.dig ;
 PartNo   00 ;
-Date     10.12.2025 ;
+Date     22.01.2026 ;
 Revision 01 ;
 Designer david ;
 Company  unknown ;
@@ -17,6 +17,7 @@ PIN 4 = A12;
 PIN 3 = A13;
 PIN 2 = A14;
 PIN 1 = A15;
+PIN 6 = CFG10K;
 PIN 13 = IOREQ;
 PIN 11 = M1;
 PIN 10 = MREQ;
@@ -31,5 +32,6 @@ PIN 17 = ROM;
 /* combinatorial logic */
 BANK = !A14 # !A15;
 IOWRI = !IOREQ & M1 & !WR;
-RAM = (!A11 & !A15) # (!A12 & !A15) # (!A13 & !A15) # (!A14 & !A15) # MREQ;
-ROM = A14 # A15 # MREQ;
+RAM = (A11 & !A12 & A13 & !A15) # (!A11 & A12 & A13 & !A15) # (!A11 & !A15 & !CFG10K) # (!A13 & !A15 & !CFG10K) 
+     # (!A14 & !A15) # MREQ;
+ROM = (A11 & A13 & A14) # (A12 & A13 & A14) # (A14 & CFG10K) # A15 # MREQ;
